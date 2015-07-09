@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">swp_huang</string>
+    <string name="hello_world">Hello world!</string>
+	
+    <!-- aty_main -->
+ 	<string name="tab1">我的黄石通</string>
+ 	<string name="tab2">刷卡记录</string>
+ 	<string name="tab3">充值记录</string>
+    <!-- aty_main -->
+
+    <!-- frg_home -->
+     <string name="update_home">刷新</string>
+     <string name="setting_home">设置</string>
+     <string name="validday_home">有效日期</string>
+     <string name="bigcard_home">普通卡充值</string>
+     <string name="SWPcard_home">手机卡充值</string>
+     <!-- frg_home -->
+     
+     <!-- frg_record -->
+     <string name="charge_record">充值金额：</string>
+     <string name="charge_money_record">1.00元</string>
+     <string name="PulbishCardNO_record">卡号：13410006063</string>
+     <string name="status_record">状态：支付-成功/圈存-成功</string>
+     <string name="time_record">交易时间：2015年06月24日，11：17：56</string>
+     <!-- frg_record -->
+     
+</resources>
