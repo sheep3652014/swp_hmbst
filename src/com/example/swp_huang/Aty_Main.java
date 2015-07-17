@@ -1,12 +1,27 @@
 package com.example.swp_huang;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.example.fragment_adapter.Frgpager_adapter;
+import com.example.listview.ListView_dispatch;
+
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
 import android.gesture.GestureOverlayView;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTabHost;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.PagerTabStrip;
+import android.support.v4.view.PagerTitleStrip;
+import android.support.v4.view.ViewPager;
+import android.text.Layout.Alignment;
 import android.view.GestureDetector;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.Menu;
@@ -16,6 +31,7 @@ import android.view.View;
 import android.view.View.OnGenericMotionListener;
 import android.view.View.OnTouchListener;
 import android.view.Window;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TabHost.OnTabChangeListener;
@@ -26,9 +42,17 @@ public class Aty_Main extends FragmentActivity
 {
 	private static final int RIGHT = 1;
 	private static final int LEFT = 2;
-	private  FragmentTabHost tabhost;
+	private ViewPager viewPager;
+	private PagerTabStrip PagerTab;
+	private FrameLayout frame_Title;
+	private FrameLayout frame_content;
+	private FragmentManager fm;
+	private FragmentTransaction transaction;
+	private List<String> titlelist = new ArrayList<String>();
+	private List<Fragment> fragmentlist = new ArrayList<Fragment>();
 	
 	private GestureDetector gesture = null;
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -38,181 +62,61 @@ public class Aty_Main extends FragmentActivity
 		setContentView(R.layout.aty_main_layout);
 		
 		FindView();
-		IniteGesture();
-		//InitView();
+		Init();
 	}
 	
-	@SuppressLint("NewApi")
-	private void IniteGesture()
-	{
-		
-		gesture = new GestureDetector(Aty_Main.this, new myTouchListener());
-		
-	}
 	
-	class myTouchListener implements OnGestureListener
-	{
-			
-			@Override
-			public boolean onSingleTapUp(MotionEvent e)
-			{
-				// TODO Auto-generated method stub
-				Toast.makeText(Aty_Main.this, "onsingleTapup", Toast.LENGTH_SHORT).show();
-				return false;
-			}
-			
-			@Override
-			public void onShowPress(MotionEvent e)
-			{
-				// TODO Auto-generated method stub
-				Toast.makeText(Aty_Main.this, "onshowpress", Toast.LENGTH_SHORT).show();
-			}
-			
-			@Override
-			public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX,
-					float distanceY)
-			{
-				// TODO Auto-generated method stub
-				Toast.makeText(Aty_Main.this, "onscroll", Toast.LENGTH_SHORT).show();
-				return false;
-			}
-			
-			@Override
-			public void onLongPress(MotionEvent e)
-			{
-				// TODO Auto-generated method stub
-				Toast.makeText(Aty_Main.this, "onlongpress", Toast.LENGTH_SHORT).show();
-			}
-			
-			@Override
-			public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
-					float velocityY)
-			{
-				// TODO Auto-generated method stub
-				Toast.makeText(Aty_Main.this, "onfling", Toast.LENGTH_SHORT).show();
-				return false;
-			}
-			
-			@Override
-			public boolean onDown(MotionEvent e)
-			{
-				// TODO Auto-generated method stub
-				Toast.makeText(Aty_Main.this, "ondown", Toast.LENGTH_SHORT).show();
-				return false;
-			}
-		
-	}
-	
-	@Override
-	public boolean onTouchEvent(MotionEvent event)
-	{
-		// TODO Auto-generated method stub
-		System.out.println("ontouch");
-		return gesture.onTouchEvent(event);//super.onTouchEvent(event);
-	}
-
-	/**
-	 * …Ë÷√tabhost
-	 */
 	private void FindView()
 	{
-		tabhost = (FragmentTabHost) findViewById(R.id.tabhost);
-		tabhost.setup(Aty_Main.this, getSupportFragmentManager(),R.id.realtabcontent);
-		
-		TabSpec tabSpec1 = tabhost.newTabSpec(getString(R.string.tab1))
-								 .setIndicator(getString(R.string.tab1));
-		
-		TabSpec tabSpec2 = tabhost.newTabSpec(getString(R.string.tab2))
-				.setIndicator(getString(R.string.tab2));
-		
-		TabSpec tabSpec3 = tabhost.newTabSpec(getString(R.string.tab3))
-				//.setContent(new Intent(Aty_Main.this, frg_record.class))  //for Activity
-				.setIndicator(getString(R.string.tab3));
-						  
-		tabhost.addTab(tabSpec1, frg_home.class, null);
-		tabhost.addTab(tabSpec2, frg_consume.class, null);
-		tabhost.addTab(tabSpec3, frg_record.class, null);
-//		tabhost.addTab(tabSpec1);
-//		tabhost.addTab(tabSpec2);
-//		tabhost.addTab(tabSpec3);
-	}
-
-
-
-	
-	/*private float x_old,y_old, x_new, y_new;
-	private void InitView()
-	{
-		tabhost.setOnTabChangedListener(new OnTabChangeListener()
-		{
-			
-			@Override
-			public void onTabChanged(String tabId)
-			{
-				// TODO Auto-generated method stub
-				System.out.println("tabid = " + tabId);
-			}
-		});
-		tabhost.setOnTouchListener(new OnTouchListener()
-		{
-			
-			@Override
-			public boolean onTouch(View v, MotionEvent event)
-			{
-				switch (event.getAction())
-				{
-					case MotionEvent.ACTION_DOWN:
-						x_old = event.getRawX();
-						y_old = event.getRawY();
-						System.out.println("touch down");
-						break;
-//					case MotionEvent.ACTION_MOVE:
-//						x_new = event.getX();
-//						y_new = event.getY();
-//						System.out.println("touch move");
-//						break;
-					case MotionEvent.ACTION_UP:
-						x_new = event.getRawX(); 
-						y_new = event.getRawY();
-						System.out.println("touch up");
-						int myint = DirctionJudge(x_old, y_old, x_new, y_new);
-						if(RIGHT == myint)
-						{
-							System.out.println("right");
-						}
-						else if(LEFT == myint)
-						{
-							System.out.println("left");
-						}
-						break;
-					default:
-						break;
-				}
-				//System.out.println("touch");
-				return true;
-			}
-		});
+		frame_Title = (FrameLayout) findViewById(R.id.frame_Title);
+		viewPager = (ViewPager) findViewById(R.id.ViewPager);
+		PagerTab = (PagerTabStrip) findViewById(R.id.PagerTab);
 	}
 	
-	private int DirctionJudge(float x_old, float y_old, float x_new, float y_new)
+	private void Init()
 	{
-		float x,y;
-		x = (x_new - x_old);
-		y = (y_new - y_old);
-		System.out.println(""+x_old+"_"+y_old+","+x_new+"_"+y_new + ","+Math.abs(x) +","+Math.abs(y));
+		fm = getSupportFragmentManager();
+		transaction = fm.beginTransaction();
 		
-		if((4*Math.abs(y) < Math.abs(x)) && (Math.abs(x) > 10))
+		transaction.replace(R.id.frame_Title, new frg_title_home());
+		//transaction.addToBackStack(null);//ÃÌº”÷¡backstack’ª
+		
+		InitViewPager(fm);
+		
+		transaction.commit();
+	}
+	
+	private void InitViewPager(FragmentManager fm)
+	{
+		String[] titles = getResources().getStringArray(R.array.Title);
+		
+		PagerTab.setTextColor(getResources().getColor(R.color.l_blue));
+		PagerTab.setTabIndicatorColor(getResources().getColor(R.color.l_blue));
+		PagerTab.setBackgroundColor(getResources().getColor(R.color.white));
+		//PagerTab.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);//newAPI
+		
+		
+		if(titles.length < 3)
 		{
-			if(x > 0)
-			{
-				return RIGHT; 
-			}
-			else
-			{
-				return LEFT;
-			}
+			titles[0] = "--";
+			titles[1] = "--";
+			titles[2] = "--";
 		}
+		titlelist.add(titles[0]);
+		titlelist.add(titles[1]);
+		titlelist.add(titles[2]);
 		
-		return 0;
-	}*/
+		Fragment frg_home = new frg_home();
+		Fragment frg_consume = new frg_consume();
+		Fragment frg_record = new frg_record();
+		
+		fragmentlist.add(frg_home);
+		fragmentlist.add(frg_consume);
+		fragmentlist.add(frg_record);
+		
+		viewPager.setAdapter(new Frgpager_adapter(fm, titlelist, fragmentlist));
+		
+	}
+	
+	
 }

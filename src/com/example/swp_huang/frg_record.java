@@ -150,7 +150,8 @@ public class frg_record extends Fragment
 				holder = new Holder();
 				
 				System.out.println("record" + parent.getContext());
-				convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.viewitem_record, parent, false);
+				//convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.viewitem_record, parent, false);
+				convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.viewitem_record_cardview, parent, false);
 				
 				holder.ib_delete = (ImageButton) convertView.findViewById(R.id.ib_delete);
 				holder.ib_refund = (ImageButton) convertView.findViewById(R.id.ib_refund);

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.ListView;
 
 public class ListView_dispatch extends ListView
@@ -43,6 +44,18 @@ public class ListView_dispatch extends ListView
 		// TODO Auto-generated method stub
 		return super.onTouchEvent(ev);
 	}
+
+	@Override
+	public boolean onInterceptTouchEvent(MotionEvent ev)
+	{
+		// TODO Auto-generated method stub
+		
+		View currentView = findFocus();
+		
+		return super.onInterceptTouchEvent(ev);
+		
+	}
+	
 	
 	
 }

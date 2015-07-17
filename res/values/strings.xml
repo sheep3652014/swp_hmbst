@@ -4,6 +4,11 @@
     <string name="app_name">swp_huang</string>
     <string name="hello_world">Hello world!</string>
 	
+    <!-- frg_title -->
+    <string name="frg_title_home">天翼黄石通</string>
+    
+    <!-- frg_title -->
+    
     <!-- aty_main -->
  	<string name="tab1">我的黄石通</string>
  	<string name="tab2">刷卡记录</string>

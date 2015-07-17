@@ -10,6 +10,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,7 @@ public class frg_consume extends Fragment
 	private myAdapter adapter = null;
 	
 	private View view = null;
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState)
@@ -53,6 +55,8 @@ public class frg_consume extends Fragment
 		return view;
 	}
 
+	
+	
 	/**
 	 * 初始化控件
 	 * @param view
@@ -91,6 +95,16 @@ public class frg_consume extends Fragment
 		list.add("记录7");
 		list.add("记录8");
 		list.add("记录9");
+		list.add("记录10");
+		list.add("记录11");
+		list.add("记录12");
+		list.add("记录13");
+		list.add("记录14");
+		list.add("记录15");
+		list.add("记录16");
+		list.add("记录17");
+		list.add("记录18");
+		list.add("记录19");
 		
 		return list;
 	}
